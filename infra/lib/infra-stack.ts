@@ -34,15 +34,6 @@ export class InfraStack extends cdk.Stack {
       "Allow HTTP access from anywhere"
     );
 
-    // add a rule allowing ssh traffic
-    // WARNING: DO NOT DO THIS FOR A PRODUCTION INSTANCE IN PS
-    // THIS IS FOR SANDBOX USAGE ONLY
-    securityGroup.addIngressRule(
-      ec2.Peer.anyIpv4(),
-      ec2.Port.tcp(22),
-      "Allow HTTP access from anywhere"
-    );
-
     // Create our instance for our rails app
     const instance = new ec2.Instance(this, "GuitarPartsPickerRailsApp", {
       vpc,
