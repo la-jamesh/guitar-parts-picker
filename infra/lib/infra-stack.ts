@@ -34,7 +34,7 @@ export class InfraStack extends cdk.Stack {
       "Allow HTTP access from anywhere"
     );
 
-    // Create our instance for our rails app
+    // create our instance for our rails app
     const instance = new ec2.Instance(this, "GuitarPartsPickerRailsApp", {
       vpc,
       instanceType: new ec2.InstanceType("t2.micro"),
