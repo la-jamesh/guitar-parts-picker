@@ -34,6 +34,14 @@ export class InfraStack extends cdk.Stack {
       "Allow HTTP access from anywhere"
     );
 
+    // WARNING DO NOT DO THIS IN PRODUCTION ON A REAL APP
+    // THIS IS A SECURITY RISK AND IS FOR SANDBOX USE ONLY
+    securityGroup.addIngressRule(
+      ec2.Peer.anyIpv4(),
+      ec2.Port.tcp(22),
+      "Allow SSH access from anywhere"
+    );
+
     // create our instance for our rails app
     const instance = new ec2.Instance(this, "GuitarPartsPickerRailsApp", {
       vpc,
