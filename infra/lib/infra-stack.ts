@@ -18,10 +18,14 @@ export class InfraStack extends cdk.Stack {
     });
 
     // new security group for our instance
-    const securityGroup = new ec2.SecurityGroup(this, "MySecurityGroup", {
-      vpc,
-      allowAllOutbound: true, // Allow outbound traffic to the internet
-    });
+    const securityGroup = new ec2.SecurityGroup(
+      this,
+      "GuitarPartsPickerRailsAppSecurityGroup",
+      {
+        vpc,
+        allowAllOutbound: true, // Allow outbound traffic to the internet
+      }
+    );
 
     // add a rule allowing http traffic
     securityGroup.addIngressRule(
@@ -48,11 +52,5 @@ export class InfraStack extends cdk.Stack {
       vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC },
       associatePublicIpAddress: true,
     });
-
-    // alll connections into 80 on the instance
-    instance.connections.allowFromAnyIpv4(
-      ec2.Port.tcp(80),
-      "Allow inbound HTTP traffic"
-    );
   }
 }
